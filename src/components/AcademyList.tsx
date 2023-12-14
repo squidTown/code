@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import containers from "../styles/pages/Container.module.css";
 import styles from '../styles/components/AcademyList.module.css'
 import location from "../assets/json/location.json";
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const AcademyList = () => {
   const navigate = useNavigate();
-  const [showDetail, setShowDetail] = useState(false);
 
   const toggleContainer = (id: number) => {
     navigate(`/academy/${id}`);
@@ -20,7 +19,6 @@ const AcademyList = () => {
           {location.positions.map((element) => (
             <AcademyItem
               list={element}
-              setShowDetail={setShowDetail}
               toggleContainer={toggleContainer}
             />
           ))}

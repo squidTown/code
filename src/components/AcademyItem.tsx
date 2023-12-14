@@ -5,7 +5,7 @@ import TagItem from "./TagItem";
 
 const AcademyItem = (props: {
   list: AcademyType;
-  setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowDetail?: React.Dispatch<React.SetStateAction<boolean>>;
   toggleContainer: any;
   setNowState?: React.Dispatch<React.SetStateAction<any>>;
 }) => {
@@ -13,7 +13,8 @@ const AcademyItem = (props: {
     <div
       className={styles.container}
       onClick={() => {
-        props.setShowDetail(true);
+        if (props.setShowDetail)
+          props.setShowDetail(true);
         props.toggleContainer(props.list.id, props.list.name, props.list.location, props.list.tag);
         if (props.setNowState)
           props.setNowState({
