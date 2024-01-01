@@ -1,9 +1,11 @@
-import React from 'react'
 import styles from '../styles/components/ChatLog.module.css'
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 
 const ChatLog = (props: {userPosition: string;}) => {
   return (
-    <div className={styles.right}>
+    <div className={cx([`${props.userPosition}`].join(" "))}>
       <div className={styles.profile}></div>
       <div className={styles.textBox}>
         <div className={styles.tail}></div>

@@ -1,8 +1,9 @@
 .inner {
   display: flex;
   width: 100%;
-  height: calc(100% - 104px);
-  margin-top: 50px;
+  height: calc(100vh - 110px);
+  padding-top: 50px;
+  padding-bottom: 30px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -51,15 +52,28 @@
 
 .chatUserInner > div {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 27px;
 }
 
 .chatUserInner > span {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 18px;
   letter-spacing: -0.25px;
   position: relative;
   top: 8px;
+}
+
+.chatLog {
+  height: calc(100% - 78px);
+  overflow-y: scroll;
+}
+
+.chatLog::-webkit-scrollbar {
+  width: 0;
+}
+
+.chatLog::-webkit-scrollbar-horizontal {
+  display: none;
 }

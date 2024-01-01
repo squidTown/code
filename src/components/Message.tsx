@@ -21,6 +21,16 @@ const Message = () => {
             </div>
             <div className={styles.chatLog}>
               <ChatLog userPosition={"right"} />
+              <ChatLog userPosition={"left"} />
+              <ChatLog userPosition={"left"} />
+              <ChatLog userPosition={"left"} />
+              <ChatLog userPosition={"left"} />
+              <ChatLog userPosition={"left"} />
+              <ChatLog userPosition={"right"} />
+              <ChatLog userPosition={"right"} />
+              <ChatLog userPosition={"right"} />
+              <ChatLog userPosition={"right"} />
+              <ChatLog userPosition={"right"} />
             </div>
           </div>
         </div>
