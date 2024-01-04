@@ -7,6 +7,8 @@ import MyPageItem from "./MyPageItem";
 import { UserInfo } from "../App";
 import { myPageInfo } from "../api/userAPI";
 import { removeCookie } from "../utils/cookie";
+import Modal from "react-modal";
+import MyPageModal from "./MyPageModal";
 
 const MyPageContainer = (props: { id: any }) => {
   const navigate = useNavigate();
@@ -19,14 +21,47 @@ const MyPageContainer = (props: { id: any }) => {
     "회원탈퇴",
   ];
   const [information, setInformation] = useState<UserInfo>();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [data, setData] = useState();
+
+  const customModalStyles: ReactModal.Styles = {
+    overlay: {
+      backgroundColor: " rgba(0, 0, 0, 0.5)",
+      width: "100%",
+      height: "100vh",
+      zIndex: "10000",
+      position: "fixed",
+      top: "0",
+      left: "0",
+    },
+    content: {
+      maxWidth: "570px",
+      width: "100%",
+      height: "620px",
+      zIndex: "150",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      borderRadius: "10px",
+      boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
+      backgroundColor: "white",
+      justifyContent: "center",
+      overflow: "auto",
+    },
+  };
 
   const clickLogOut = () => {
-    removeCookie("Authorization",{ path: '/' });
+    removeCookie("Authorization", { path: "/" });
     navigate("/");
   };
 
   const clickAlter = () => {
     navigate(`/alteruser/${props.id}`);
+  };
+
+  const handlePopupMessage = () => {
+    setModalOpen(!modalOpen);
   };
 
   useEffect(() => {
@@ -37,7 +72,7 @@ const MyPageContainer = (props: { id: any }) => {
         }
       })
       .catch((err) => {
-        navigate('/login')
+        navigate("/login");
       });
   }, []);
 
@@ -60,9 +95,34 @@ const MyPageContainer = (props: { id: any }) => {
             </div>
             <div className={styles.list}>
               {list.map((element, idx) => (
-                <MyPageItem key={`item${idx}`} txt={element} idx={idx} />
+                <MyPageItem
+                  key={`item${idx}`}
+                  txt={element}
+                  idx={idx}
+                  onClick={handlePopupMessage}
+                />
               ))}
             </div>
+            <Modal
+              isOpen={modalOpen}
+              onRequestClose={handlePopupMessage}
+              style={customModalStyles}
+              ariaHideApp={false}
+              contentLabel="Pop up Message"
+              shouldCloseOnOverlayClick={false}
+            >
+              {data ? <MyPageModal /> : <div>
+                <div className={styles.noNotice}>
+                  <span>아직 공지사항이 없습니다.</span>
+                </div>
+                <span
+                  className={styles.closeButton}
+                  onClick={handlePopupMessage}
+                >
+                  닫기 X
+                </span>
+              </div>}
+            </Modal>
             <div className={styles.btnContainer}>
               <Button
                 size="big"
